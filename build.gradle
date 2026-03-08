@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id "io.qameta.allure" version "2.12.0"
 }
 
 repositories {
@@ -7,13 +8,43 @@ repositories {
 }
 
 dependencies {
+    // Selenium
     implementation 'org.seleniumhq.selenium:selenium-java:4.21.0'
+
+    // TestNG
+    testImplementation 'org.testng:testng:7.10.2'
+
+    // Allure TestNG integration
+    testImplementation 'io.qameta.allure:allure-testng:2.24.0'
 }
 
-sourceSets {
-    main {
-        java {
-            srcDirs = ['src/java']
-        }
+test {
+    useTestNG()
+
+    // Run only Navigate class
+    filter {
+        includeTestsMatching "Navigate" // if default package
+        // if in a package, use full name e.g., "com.automation.Navigate"
     }
+
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
+
+allure {
+    version = "2.24.0"
+    autoconfigure = true
+    aspectjweaver = true
+}
+
+// Date-based Allure report
+import java.text.SimpleDateFormat
+
+def currentDate = new SimpleDateFormat("yyyy-MM-dd_HH-mm").format(new Date())
+
+tasks.register("navigateReport", Exec) {
+    dependsOn test
+    commandLine "cmd", "/c",
+            "allure generate build/allure-results -o build/allure-report-${currentDate} --clean"
 }
