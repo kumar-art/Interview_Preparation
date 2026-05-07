@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="com.obiscr.chatgpt.settings.EasyCodeState">
+    <option name="projectFiles" value="$PROJECT_DIR$/src/main/java/pages/LoginPage.java;C:/Users/Admin/IdeaProjects/selenium_examples/src/main/java/pages/SauceLogin.java;C:/Users/Admin/IdeaProjects/selenium_examples/src/main/resources/Main.java;C:/Users/Admin/IdeaProjects/selenium_examples/src/test/java/SamplLocators/Example.java;C:/Users/Admin/IdeaProjects/selenium_examples/src/test/java/SamplLocators/LocatorsTest.java;C:/Users/Admin/IdeaProjects/selenium_examples/src/test/java/SamplLocators/Navigate.java;C:/Users/Admin/IdeaProjects/selenium_examples/src/test/java/SamplLocators/Simple.java;C:/Users/Admin/IdeaProjects/selenium_examples/src/test/java/tests/LoginTest.java;C:/Users/Admin/IdeaProjects/selenium_examples/src/test/java/tests/SauceTest.java;C:/Users/Admin/IdeaProjects/selenium_examples/README.md" />
+  </component>
+</project>

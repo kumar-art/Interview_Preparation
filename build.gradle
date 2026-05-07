@@ -14,37 +14,37 @@ dependencies {
     // TestNG
     testImplementation 'org.testng:testng:7.10.2'
 
-    // Allure TestNG integration
+    // Allure TestNG
     testImplementation 'io.qameta.allure:allure-testng:2.24.0'
 }
 
 test {
     useTestNG()
 
-    // Run only Navigate class
-    filter {
-        includeTestsMatching "Navigate" // if default package
-        // if in a package, use full name e.g., "com.automation.Navigate"
-    }
-
     testLogging {
         events "passed", "skipped", "failed"
     }
+}
+
+/* Run ONLY LocatorsTest */
+tasks.register('runLocatorsTest', Test) {
+    useTestNG()
+    include '**/LocatorsTest.class'
+}
+
+/* Date format for report */
+import java.text.SimpleDateFormat
+def currentDate = new SimpleDateFormat("yyyy-MM-dd_HH-mm").format(new Date())
+
+/* Allure report for LocatorsTest ONLY */
+tasks.register("locatorsReport", Exec) {
+    dependsOn runLocatorsTest
+    commandLine "cmd", "/c",
+            "allure generate build/allure-results -o build/locators-report-${currentDate} --clean"
 }
 
 allure {
     version = "2.24.0"
     autoconfigure = true
     aspectjweaver = true
-}
-
-// Date-based Allure report
-import java.text.SimpleDateFormat
-
-def currentDate = new SimpleDateFormat("yyyy-MM-dd_HH-mm").format(new Date())
-
-tasks.register("navigateReport", Exec) {
-    dependsOn test
-    commandLine "cmd", "/c",
-            "allure generate build/allure-results -o build/allure-report-${currentDate} --clean"
 }

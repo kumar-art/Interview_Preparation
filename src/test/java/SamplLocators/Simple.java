@@ -1,3 +1,5 @@
+package SamplLocators;
+
 import io.qameta.allure.Description;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
@@ -9,13 +11,13 @@ import org.testng.annotations.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Navigate {
+public class Simple {
 
     WebDriver driver;
 
     @Test
     @Description("Login to SauceDemo using problem_user")
-    public void test() throws InterruptedException {
+    public void test() {
         setupDriver();
         login("problem_user", "secret_sauce");
         printPageDetails();
@@ -34,25 +36,16 @@ public class Navigate {
     }
 
     @Step("Login with username: {0} and password: {1}")
-    public void login(String username, String password) throws InterruptedException {
+    public void login(String username, String password) {
         driver.get("https://www.saucedemo.com/");
         driver.findElement(By.id("user-name")).sendKeys(username);
         driver.findElement(By.id("password")).sendKeys(password);
         driver.findElement(By.id("login-button")).click();
-
-        driver.navigate().to("https://www.amazon.in/?&tag=googhydrabk1-21&ref=pd_sl_5szpgfto9i_e&adgrpid=155259813593&hvpone=&hvptwo=&hvadid=674893540034&hvpos=&hvnetw=g&hvrand=16691937439543417323&hvqmt=e&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=1007740&hvtargid=kwd-64107830&hydadcr=14452_2316413&gad_source=1");
-      //  driver.navigate().back();
-      //  Thread.sleep(2000);
-
-       // driver.navigate().refresh();
-        //driver.close();
     }
 
     @Step("Print page title and URL")
     public void printPageDetails() {
         System.out.println(driver.getTitle());
         System.out.println(driver.getCurrentUrl());
-     //   driver.quit();
-        driver.close();
     }
 }
